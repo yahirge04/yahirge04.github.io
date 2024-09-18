@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Estilos */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+
+    box-sizing: border-box;
+    background-image: url('Imagenes/UAT.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed ;
+}
+
+
+header {
+    background-color: #FF5722;
+    padding: 10px;
+}
+
+nav ul {
+
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+
+.welcome {
+    text-align: center;
+    padding: 50px;
+    background-color: rgba(0,0,0,0.5);
+    
+}
+
+.welcome h1 {
+    color: #ffffff;
+}
+
+button {
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #E64A19;
+}
+.especialidades {
+    display: flex;
+    padding: 50px;
+    margin: 50px;
+}
+
+.especialidad {
+    width: 30%;
+    text-align: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.especialidad h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.especialidad p {
+    color: #555;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Biografía</a></li>
+                <li><a href="#">Acerca de</a></li>
+                <li><a href="#">Programas Frecuentes</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="welcome">
+            <h1>Bienvenidos a la Universidad Autónoma de Tamaulipas</h1>
+            <button onclick="window.location.href='http://www.uat.edu.mx'">Conocer más de la UAT</button>
+        </section>
+    </main>
+    <section class="welcome">
+
+        <!-- Sección de especialidades con imágenes -->
+    <section class="especialidades">
+        <div class="especialidad">
+        
+            <h2>Tecnologias de la informacion</h2>
+            <p>Explora el mundo de la tecnología y la programación para resolver problemas complejos.</p>
+        </div>
+        <div class="especialidad">
+ 
+            <h2>Contador Publico</h2>
+            <p>Formamos a los futuros doctores que mejorarán la salud de nuestra comunidad.</p>
+        </div>
+        <div class="especialidad">
+
+            <h2>Administración de Empresas</h2>
+            <p>Capacítate para gestionar la contabilidad, las finanzas y los impuestos de organizaciones públicas y privadas. </p>
+        </div>
+</section>
+</body>
+</html>
