@@ -1,58 +1,105 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Superior</title>
-
+    <title>uat</title>
     <style>
-        body {
+
+
+body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-}
 
-#superior{
-    background-image: url(imagenes/UAT.jpg);
+    box-sizing: border-box;
+    background-image: url('Imagenes/UAT.jpg');
     background-size: cover;
     background-position: center;
-
+    background-attachment: fixed ;
 }
+
 
 header {
-    background-color: rgb(255, 136, 0);
+    background-color: #FF5722;
+    padding: 10px;
 }
 
-.menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(255, 136, 0);
-    text-align: center;
+nav ul {
+
+    display: flex;
+    justify-content: space-around;
 }
 
-.menu li {
-    display: inline;
-    margin-right: 20px;
-}
-
-.menu li a {
-    text-decoration: none;
+nav ul li a {
     color: white;
-    padding: 14px 20px;
-    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.menu li a:hover {
-    background-color: rgb(255, 145, 0);
+.welcome {
+    text-align: center;
+    padding: 50px;
+    background-color: rgba(0,0,0,0.5);
+    
 }
-.sobrepuesto{
-color:white;
-position: absolute;
-right: 35%;
-top: 40%;
-background-color: rgba(0, 0, 0, 0.5);
+
+.welcome h1 {
+    color: #ffffff;
+}
+
+button {
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #E64A19;
+}
+.especialidades {
+    display: flex;
+    padding: 50px;
+    margin: 50px;
+    
+}
+
+.especialidad {
+    width: 30%;
+    text-align: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.especialidad h2 {
+    color: #ffffff;
+
+    margin-bottom: 15px;
+}
+
+.especialidad p {
+    color: #555;
+}
+#img1{
+    
+    background-image:url(imagenes/Informatica.jpg);
+    background-color: (rgba 0,0,0,1);
+    background-size:contain;
+    
+}
+#img2{
+    background-image:url(imagenes/contador.jpg);
+    background-color: (rgba 0,0,0,1);
+    background-size:contain;
+}
+#img3{
+    background-image:url(imagenes/administrador.jpg);
+    background-color: (rgba 0,0,0,1);
+    background-size:contain;
 }
 
 
@@ -61,20 +108,39 @@ background-color: rgba(0, 0, 0, 0.5);
 <body>
     <header>
         <nav>
-            <ul class="menu">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Biografia</a></li>
-                <li><a href="#services">Acerca de</a></li>
-                <li><a href="#contact">Preguntas frecuentes</a></li>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Biografía</a></li>
+                <li><a href="#">Acerca de</a></li>
+                <li><a href="#">Programas Frecuentes</a></li>
             </ul>
         </nav>
     </header>
-    <section id="superior">
-    <h1 class="sobrepuesto">Bienvenidos a la poderosisima <br>  Universidad Autonoma de Tamaulipas</h1>
-    <br>
-    <h1 class="sobrepuesto">Conoce mas sobre la UAT</h1>
-    </section>
+    <main>
+        <section class="welcome">
+            <h1>Bienvenidos a la Universidad Autónoma de Tamaulipas</h1>
+            <button onclick="window.location.href='http://www.uat.edu.mx'">Conocer más de la UAT</button>
+        </section>
+    </main>
+    <section class="welcome">
 
 
+    <section class="especialidades">
+        <div id="img1" class="especialidad">
+        
+            <h2>Tecnologias de la informacion</h2>
+            <p>Explora el mundo de la tecnología y la programación para resolver problemas complejos.</p>
+        </div>
+        <div id="img2" class="especialidad">
+ 
+            <h2>Contador Publico</h2>
+            <p>Capacítate para gestionar la contabilidad, las finanzas y los impuestos de organizaciones públicas y privadas. </p>
+        </div>
+        <div id="img3" class="especialidad">
+
+            <h2>Administración de Empresas</h2>
+            <p>Desarrolla habilidades clave en gestión, finanzas y estrategia para liderar y transformar organizaciones en un entorno competitivo. </p>
+        </div>
+</section>
 </body>
 </html>

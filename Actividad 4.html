@@ -3,118 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix</title>
+    <title>Document</title>
     <style>
-
         body{
-            background-color: black;
+            background-color: rgb(19, 19, 19);
         }
         h1{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 50px ;
-            color: #d3d3d3;
-            position: absolute;
-            top: 150px;
-            left: 500px
+            font-size: 50px;
+            color: white;
         }
         h2{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 30px ;
-            color: #d3d3d3;
-
-
+            font-size: 90%;
+            color: white;
+            position:relative;
+            top:80%;
+            left:3.5%
         }
-        .perfil1{
+        .selper{
             position: absolute;
-            color: #575757;
-            top:500px;
-            left: 300px; 
+            top: 90px;
+            right: 450px;
         }
-        .perfil2{
-            position: absolute;
-            color: #575757;
-
-            top:500px;
-            left: 510px; 
-        }
-        .perfil3{
-            position: absolute;
-            color: #575757;
-
-            top:500px;
-            left: 720px; 
-        }
-        .perfil4{
-            position: absolute;
-            color: #575757;
-
-            top:500px;
-            left: 930px; 
-        }
-        .perfil5{
-            position: absolute;
-            color: #575757;
-
-            top:500px;
-            left: 1120px; 
-        }
-
-
+/*
         div{
-            width: 200px;
-            height: 200px;
-            background-color:#d3d3d3;
-            display: inline-block;
-            border-width: 1px;
-            border-style: solid;
-            border-color:black;
-            position: relative;
-            top: 300px;
-            left: 240px;
-            border-radius: 10%;
+            background-color: brown;
+            height: 150px;
+            width: 150px;
+            border-radius: 5%;
+            margin: 50px;
         }
-        .colorc{
-            background-color: rgb(117, 0, 0);
- 
- 
+*/
+
+        #myDIV {
+        
+        display: grid;
+        gap: 8%;
+        padding: 10px;
+        grid-template-columns: auto auto auto auto auto;
+        justify-items: center;
+        position: absolute;
+        top: 35%;
+        margin-left: 20%;
+        
         }
-        #imagen{
-            background-image: url(imagenes/perfil.jpg);
-            
+        #myDIV div {
+        background-color: brown;
+        height: 115px;
+        width: 115px;
+        text-align: center;
+        font-size: 30px;
+        border-radius: 5%;
+        cursor: pointer;
+        
         }
+
+
+
+        .img1{
+            background-image: url(imagenes/perfil\ 1.jpg);
+            background-size: contain;
+            cursor: pointer;;
+        }
+        .img2{
+            background-image: url(imagenes/perfil\ 2.jpg);
+            background-size: contain;
+        }
+        .img3{
+            background-image: url(imagenes/perfil\ 3.png);
+            background-size: contain;
+        }
+        .img4{
+            background-image: url(imagenes/perfil\ 4.jpg);
+            background-size: contain;
+        }
+        .img5{
+            background-image: url(imagenes/perfil\ 1.jpg);
+            background-size: contain;
+        }
+        .img1:hover{
+            background-color: rgba(122, 122, 122, 0.3);
+        transform: scale(1.05);   
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+        }
+        .img2:hover{
+            background-color: rgba(122, 122, 122, 0.3);
+        transform: scale(1.05);   
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+        }
+        .img3:hover{
+            background-color: rgba(122, 122, 122, 0.3);
+        transform: scale(1.05);   
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+        }
+        .img4:hover{
+            background-color: rgba(122, 122, 122, 0.3);
+        transform: scale(1.05);   
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+        }
+        .img5:hover{
+            background-color: rgba(122, 122, 122, 0.3);
+        transform: scale(1.05);   
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+        }
+
+
+
+
         button{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-            color: rgb(99, 99, 99);
-            background-color: black;
-            border-color: rgba(46, 46, 46, 0);
-            position: absolute;
-            top: 700px;
-            right: 760px;
+            font-size: 15px;
+            color: rgb(116, 116, 116);
+            background-color: rgba(0, 0, 0, 0);
+            width: 220px;
+            height: 35px;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-
-        
+        button:hover {
+        background-color: rgba(122, 122, 122, 0.3);
+        transform: scale(1.05);      /* Aumenta ligeramente el tamaño */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra sutil */
+}
+        #btn1{
+        position: absolute;
+        top: 500px;
+        right: 580px;
+        }
 
     </style>
 </head>
 <body>
+    
+    <h1 class="selper">¿Quien esta viendo?</h1>
 
-    <h1>¿Quien esta viendo?</h1>
+    <div id="myDIV">
+        <div class="img1"><h2>Perfil 1</h2></div>
+        <div class="img2"><h2>Perfil 2</h2></div>
+        <div class="img3"><h2>Perfil 3</h2></div>
+        <div class="img4"><h2>Perfil 4</h2></div>
+        <div class="img5"><h2>Perfil 5</h2></div>
+        
 
-    <div id="imagen" class="colorc"></div>
-    <div class="colorc"></div>
-    <div id="imagen" class="colorc"></div>
-    <div class="colorc"></div>
-    <div class="colorc"></div>
-
-    <h2 class="perfil1">Perfil 1</h2>
-    <h2 class="perfil2">Perfil 2</h2>
-    <h2 class="perfil3">Perfil 3</h2>
-    <h2 class="perfil4">Perfil 4</h2>
-    <h2 class="perfil5">Perfil 5</h2>
-
-    <button>Administrar perfiles</button>
+    </div>
+    <button id="btn1">ADMINISTRAR PERFILES</button>
 
 </body>
 </html>
