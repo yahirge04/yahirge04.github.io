@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body, form{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            font-size: 2rem;
+        }
+        input, select{
+            height: 24px;
+            width: 50%;
+            padding: 5px;
+            font-size: 1.5rem;
+            color: red;
+            margin: 50px;
+
+        }
+
+        input:focus{
+            background-color: gray;
+            color: white
+        }
+        #btnenviar{
+            padding: 20px;
+            font-size: 1.2rem;
+            width: 10vw;
+        }
+    </style>
+</head>
+<body>
+    <form>
+            <label>Entrada de tipo texto</label>
+            <input type="text"required/>
+
+            <label>Entrada de tipo numerico</label>
+            <input type="date"/>
+
+            <label>Entrada de tipo email</label>
+            <input type="email" />
+
+            <label>Entrada de tipo hora</label>
+            <input type="time" />
+
+            <label>Entrada de tipo archivo</label>
+            <input type="file" />
+
+            <label>Entrada de tipo contraseña</label>
+            <input type="password" />
+
+            <select required>
+                <option value="">- Selecciona una opcion valida</option>
+                <option value="Mexico">Mexico</option>
+                <option value="EUA">EUA</option>
+                <option value="Canada">Canada</option>
+            </select>
+            
+        <input id=btnenviar type="submit">
+
+    </form>
+
+
+
+</body>
+</html>
