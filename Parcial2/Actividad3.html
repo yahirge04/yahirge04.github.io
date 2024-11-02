@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body{
+            background-image: url(img/UATLOGIN.jpg);
+            background-size:cover ;
+
+            font-family: "Anton", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /*form, div{
+
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            margin-right: 400px;
+            margin-left: 400px;
+        }
+            */
+            form, div{
+
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            margin-right: 400px;
+            margin-left: 400px;
+            margin-top: 5%;
+            
+            
+            }
+
+
+        form{
+             background-color: rgba(0, 0, 0, 0.8);   
+             
+
+        }
+        label, h1{
+            
+            color: white;
+            font-size: 30px;
+            position:relative;
+            
+            
+        }
+        .texto{
+            width: 250px;
+            font-size: 20px;
+            text-align-last: center;
+            
+        }
+        #btnIniciarSesion{
+            width: 200px;
+            padding: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h1>Iniciar sesion</h1>
+            <div>
+                <label>Usuario</label>
+                <input class="texto" type="text">
+            </div>
+            <div>
+                <label>Contraseña</label>
+                <input class="texto" type="password">
+            </div>
+            <div>
+                <input id="btnIniciarSesion" type="submit" value="Iniciar sesion">
+                
+            </div>
+            <div></div>
+    </form>
+</body>
+</html>

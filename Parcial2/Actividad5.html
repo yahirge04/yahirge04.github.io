@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Actividad5.css">
+</head>
+<body>
+    <h1 class="titulo">¿Quién es este Pokémon?</h1>
+
+    <div class="contImg">
+        <div id="miDiv" class="img"></div>
+    </div>
+
+    
+
+    <div class="contGen">
+        <input class="btn"  type="button" value="Generacion 1" onclick="consultarPokemon(1,151)">
+        <input class="btn"  type="button" value="Generacion 2" onclick="consultarPokemon(152,251)">
+        <input class="btn"  type="button" value="Generacion 3" onclick="consultarPokemon(252,386)">
+        <input class="btn"  type="button" value="Generacion 4" onclick="consultarPokemon(387,493)">
+        <input class="btn"  type="button" value="Generacion 5" onclick="consultarPokemon(494,649)">
+        <input class="btn"  type="button" value="Generacion 6" onclick="consultarPokemon(650,721)">
+    </div>
+
+    <div class="contNomPok">
+        <input class="btn" type="button" id="res3" onclick="validar(this)">
+        <input class="btn" type="button" id="res2" onclick="validar(this)">
+        <input class="btn" type="button" id="res1" onclick="validar(this)">
+        <input class="btn" type="button" id="res4" onclick="validar(this)">
+    </div>
+
+    <div class="contContador">
+        <p id="contadorC">Correcto: 0</p>
+        
+        <p id="contadorI">Incorrecto: 0</p>
+    </div>
+
+
+
+    <script src="Actividad5.js"></script>
+</body>
+</html>

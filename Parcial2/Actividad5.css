@@ -1,0 +1,79 @@
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+
+body{ 
+    font-family: 'pokemon solid', sans-serif;
+    background-image: url(img/fondo.jpg);
+    background-size: cover;
+}
+.titulo{
+    font-size: 50px;
+    color: yellow;
+    -webkit-text-stroke: 1px blue;
+    display: flex;
+    justify-content: center;
+    height: 95px;
+    margin-top: auto;
+    
+}
+#miDiv{
+    height: 200px;
+    width: 200px;
+    padding: 10px;
+    border: 10px;
+    border: solid 3px rgba(0, 0, 0, 1);
+    
+
+    justify-content: center; 
+    
+}
+
+.contImg{
+    display: grid;
+    justify-content: center;
+    height: 0px;
+}
+.img{
+   /* background-image: url(img/charmander.pn);*/
+    background-size:cover ;
+}
+.contGen{
+    display: grid;
+    flex-direction: column;
+    height: 0px;
+    width: 70%;
+}
+.btn{
+    font-family: 'pokemon solid', sans-serif;
+    font-size:x-large;
+    color: yellow;
+    -webkit-text-stroke: 1px blue;
+    background-color: rgb(177, 0, 0);
+    border-radius: 20px;
+    height: auto;
+    width: 20%;
+}
+
+.contNomPok{
+    
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height:auto;
+    width: auto;
+    margin-top:20%;
+    left: 100px;
+    
+}
+.contContador{
+    display: flex;
+    position:relative;
+    justify-content:end;
+    color: yellow;
+    -webkit-text-stroke: 1px blue;
+    font-size: x-large;
+    gap: 30px;
+    
+    
+}
+
+
