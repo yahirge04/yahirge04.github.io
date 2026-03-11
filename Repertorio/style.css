@@ -125,6 +125,13 @@ option {
     transform: translateY(-2px);
 }
 
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: -1rem;
+}
+
 .btn-export {
     background: var(--success-bg);
     color: var(--success);
@@ -138,13 +145,33 @@ option {
     gap: 0.5rem;
     transition: var(--transition);
     font-size: 0.9rem;
-    margin-left: auto;
-    margin-top: -1rem;
     backdrop-filter: blur(12px);
 }
 
 .btn-export:hover {
     background: rgba(16, 185, 129, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-import {
+    background: rgba(139, 92, 246, 0.1);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    backdrop-filter: blur(12px);
+}
+
+.btn-import:hover {
+    background: rgba(139, 92, 246, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
@@ -169,6 +196,7 @@ option {
 }
 
 .col { margin: auto 0; }
+.col-num { width: 30px; color: var(--text-muted); font-weight: 600; text-align: center; }
 .col-name { flex: 2; padding-right: 1rem; }
 .col-status { flex: 1; text-align: left; }
 .col-actions { width: 100px; text-align: right; }

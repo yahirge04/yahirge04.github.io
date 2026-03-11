@@ -32,13 +32,22 @@
             </button>
         </form>
 
-        <button id="export-excel-btn" class="btn-export">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            Exportar a Excel
-        </button>
+        <div class="action-buttons">
+            <input type="file" id="import-excel-input" accept=".xlsx" style="display: none;">
+            <button id="import-excel-btn" class="btn-import">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                Importar Excel
+            </button>
+
+            <button id="export-excel-btn" class="btn-export">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Exportar a Excel
+            </button>
+        </div>
 
         <div class="table-container glass-panel">
             <div class="table-header">
+                <div class="col col-num">#</div>
                 <div class="col col-name">Canción</div>
                 <div class="col col-status">Estado</div>
                 <div class="col col-actions">Acciones</div>
@@ -50,6 +59,6 @@
     </div>
     <!-- Script para generar Excel con estilos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

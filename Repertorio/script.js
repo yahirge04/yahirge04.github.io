@@ -1,16 +1,40 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDoNbBupPeinpHWbMdvMmwv5WyvW39FzXI",
+  authDomain: "repertorio-musical-2020d.firebaseapp.com",
+  databaseURL: "https://repertorio-musical-2020d-default-rtdb.firebaseio.com",
+  projectId: "repertorio-musical-2020d",
+  storageBucket: "repertorio-musical-2020d.firebasestorage.app",
+  messagingSenderId: "752323508273",
+  appId: "1:752323508273:web:c6a4a2d24e92edf53dbd10"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const songsRef = ref(database, 'repertorio_canciones');
+
 document.addEventListener('DOMContentLoaded', () => {
     const songForm = document.getElementById('song-form');
     const songNameInput = document.getElementById('song-name');
     const songStatusInput = document.getElementById('song-status');
     const songListContainer = document.getElementById('song-list');
 
-    // Cargar desde LocalStorage o inicializar vacío
-    let songs = JSON.parse(localStorage.getItem('repertorio_canciones')) || [];
+    // Array principal de canciones
+    let songs = [];
 
-    // Guardar en Storage local
+    // Guardar en Firebase
     const saveSongs = () => {
-        localStorage.setItem('repertorio_canciones', JSON.stringify(songs));
+        set(songsRef, songs);
     };
+
+    // Escuchar cambios de Firebase en tiempo real
+    onValue(songsRef, (snapshot) => {
+        const data = snapshot.val();
+        songs = data ? data : [];
+        renderSongs();
+    });
 
     // Renderizar la lista 
     const renderSongs = () => {
@@ -28,6 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
         songs.forEach((song, index) => {
             const row = document.createElement('div');
             row.className = 'song-row';
+
+            // Columna: Número
+            const colNum = document.createElement('div');
+            colNum.className = 'col col-num';
+            colNum.textContent = index + 1;
 
             // Columna: Canción
             const colName = document.createElement('div');
@@ -86,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             colActions.appendChild(deleteBtn);
 
+            row.appendChild(colNum);
             row.appendChild(colName);
             row.appendChild(colStatus);
             row.appendChild(colActions);
@@ -118,8 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Render inicial
-    renderSongs();
+    // El render inicial ahora es manejado automáticamente por onValue() de Firebase
 
     // Exportar a Excel (.xlsx con diseño)
     const exportExcelBtn = document.getElementById('export-excel-btn');
@@ -142,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Configurar columnas
                 worksheet.columns = [
+                    { header: 'Nº', key: 'num', width: 8 },
                     { header: 'Canción', key: 'name', width: 45 },
                     { header: 'Estado', key: 'status', width: 25 }
                 ];
@@ -157,18 +187,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 headerRow.alignment = { vertical: 'middle', horizontal: 'center' };
 
                 // Agregar datos y estilo a las celdas
-                songs.forEach(song => {
+                songs.forEach((song, index) => {
                     const row = worksheet.addRow({
+                        num: index + 1,
                         name: song.name,
                         status: song.rehearsed ? 'YA ENSAYADA' : 'NO ENSAYADA'
                     });
 
+                    // Estilo a la celda del número
+                    const numCell = row.getCell(1);
+                    numCell.font = { name: 'Arial', size: 10, bold: true, color: { argb: 'FF94A3B8' } };
+                    numCell.alignment = { vertical: 'middle', horizontal: 'center' };
+
                     // Estilo a la celda del nombre
-                    row.getCell(1).font = { name: 'Arial', size: 11 };
-                    row.getCell(1).alignment = { vertical: 'middle' };
+                    row.getCell(2).font = { name: 'Arial', size: 11 };
+                    row.getCell(2).alignment = { vertical: 'middle' };
 
                     // Estilo a la celda del estado
-                    const statusCell = row.getCell(2);
+                    const statusCell = row.getCell(3);
                     statusCell.font = { name: 'Arial', size: 10, bold: true };
                     statusCell.alignment = { vertical: 'middle', horizontal: 'center' };
 
@@ -221,6 +257,92 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Restaurar botón
                 exportExcelBtn.innerHTML = originalText;
                 exportExcelBtn.disabled = false;
+            }
+        });
+    }
+
+    // Lógica para importar desde Excel
+    const importExcelBtn = document.getElementById('import-excel-btn');
+    const importExcelInput = document.getElementById('import-excel-input');
+
+    if (importExcelBtn && importExcelInput) {
+        importExcelBtn.addEventListener('click', () => {
+            importExcelInput.click();
+        });
+
+        importExcelInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const originalText = importExcelBtn.innerHTML;
+            importExcelBtn.innerHTML = 'Importando...';
+            importExcelBtn.disabled = true;
+
+            try {
+                const reader = new FileReader();
+                
+                reader.onload = async (event) => {
+                    const data = event.target.result;
+                    const workbook = new ExcelJS.Workbook();
+                    await workbook.xlsx.load(data);
+                    
+                    const worksheet = workbook.getWorksheet(1); // Tomar la primera hoja
+                    const importedSongs = [];
+
+                    worksheet.eachRow((row, rowNumber) => {
+                        // Saltar la fila de cabecera
+                        if (rowNumber === 1) return;
+
+                        const val1 = row.getCell(1).value;
+                        const val2 = row.getCell(2).value;
+                        const val3 = row.getCell(3).value;
+
+                        let nameCell = val2;
+                        let statusCell = val3;
+
+                        // Soporte para archivos de Excel exportados sin la columna Nº
+                        if (val2 === 'YA ENSAYADA' || val2 === 'NO ENSAYADA') {
+                            nameCell = val1;
+                            statusCell = val2;
+                        }
+
+                        if (nameCell) {
+                            importedSongs.push({
+                                id: Date.now() + rowNumber, // ID único
+                                name: nameCell.toString().trim(),
+                                rehearsed: statusCell === 'YA ENSAYADA'
+                            });
+                        }
+                    });
+
+                    if (importedSongs.length > 0) {
+                        // Combinar canciones existentes con las importadas o simplemente reemplazar
+                        // En este caso, reemplazaremos para que sea una importación limpia,
+                        // puedes cambiar esto si quieres que se añadan (songs.concat(importedSongs))
+                        if(confirm(`Se encontraron ${importedSongs.length} canciones en el Excel. ¿Deseas reemplazar tu repertorio actual por este? (Si cancelas, se añadirán a tu lista actual)`)) {
+                            songs = importedSongs;
+                        } else {
+                            songs = [...songs, ...importedSongs];
+                        }
+                        
+                        saveSongs();
+                        alert("¡Repertorio importado con éxito!");
+                    } else {
+                        alert("No se encontraron canciones válidas en el archivo Excel.");
+                    }
+                    
+                    // Resetear el input file por si quiere importar el mismo archivo otra vez
+                    importExcelInput.value = '';
+                };
+                
+                reader.readAsArrayBuffer(file);
+                
+            } catch (error) {
+                console.error('Error importando Excel:', error);
+                alert("Hubo un error al leer el archivo Excel.");
+            } finally {
+                importExcelBtn.innerHTML = originalText;
+                importExcelBtn.disabled = false;
             }
         });
     }
