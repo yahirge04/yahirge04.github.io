@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Array principal de canciones
     let songs = [];
+    let editingId = null;
 
     // Guardar en Firebase
     const saveSongs = () => {
@@ -101,10 +102,57 @@ document.addEventListener('DOMContentLoaded', () => {
             
             colStatus.appendChild(statusBadge);
 
-            // Columna: Botón Eliminar
+            // Columna: Acciones
             const colActions = document.createElement('div');
             colActions.className = 'col col-actions';
             
+            // Botón Editar
+            const editBtn = document.createElement('button');
+            editBtn.className = 'btn-icon';
+            editBtn.title = 'Editar canción';
+            editBtn.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+            `;
+            
+            editBtn.addEventListener('click', () => {
+                editingId = song.id;
+                songNameInput.value = song.name;
+                if (songKeyInput) songKeyInput.value = song.key || '';
+                songStatusInput.value = song.rehearsed.toString();
+                
+                const submitBtnSpan = songForm.querySelector('button[type="submit"] span');
+                if (submitBtnSpan) submitBtnSpan.textContent = 'Guardar';
+                
+                // Mostrar botón de cancelar si no existe
+                let cancelBtn = document.getElementById('cancel-edit-btn');
+                if (!cancelBtn) {
+                    cancelBtn = document.createElement('button');
+                    cancelBtn.id = 'cancel-edit-btn';
+                    cancelBtn.type = 'button';
+                    cancelBtn.className = 'btn-secondary';
+                    cancelBtn.innerHTML = 'Cancelar';
+                    cancelBtn.onclick = () => {
+                        editingId = null;
+                        songNameInput.value = '';
+                        if (songKeyInput) songKeyInput.value = '';
+                        songStatusInput.value = 'false';
+                        if (submitBtnSpan) submitBtnSpan.textContent = 'Agregar';
+                        cancelBtn.remove();
+                    };
+                    songForm.appendChild(cancelBtn);
+                }
+                
+                // Hacer scroll suave hacia arriba y enfocar
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                songNameInput.focus();
+            });
+            
+            colActions.appendChild(editBtn);
+
+            // Botón Eliminar
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'btn-icon';
             deleteBtn.title = 'Eliminar canción';
@@ -140,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Agregar nueva canción
+    // Agregar o modificar canción
     songForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
@@ -149,12 +197,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const rehearsed = songStatusInput.value === 'true';
 
         if (name) {
-            songs.push({
-                id: Date.now(),
-                name: name,
-                key: key,
-                rehearsed: rehearsed
-            });
+            if (editingId) {
+                const index = songs.findIndex(s => s.id === editingId);
+                if (index !== -1) {
+                    songs[index].name = name;
+                    songs[index].key = key;
+                    songs[index].rehearsed = rehearsed;
+                }
+                editingId = null;
+                const submitBtnSpan = songForm.querySelector('button[type="submit"] span');
+                if (submitBtnSpan) submitBtnSpan.textContent = 'Agregar';
+                const cancelBtn = document.getElementById('cancel-edit-btn');
+                if (cancelBtn) cancelBtn.remove();
+            } else {
+                songs.push({
+                    id: Date.now(),
+                    name: name,
+                    key: key,
+                    rehearsed: rehearsed
+                });
+            }
             
             saveSongs();
             renderSongs();
