@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repertorio Musical</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Repertorio Musical</h1>
+            <p>Gestiona tus canciones y lleva el control de lo que ya has ensayado.</p>
+        </header>
+
+        <form id="song-form" class="glass-panel">
+            <div class="input-group">
+                <input type="text" id="song-name" placeholder="Nombre de la canción..." required autocomplete="off">
+            </div>
+            <div class="input-group" style="flex: 0.5; min-width: 120px;">
+                <input type="text" id="song-key" placeholder="Tonalidad..." autocomplete="off">
+            </div>
+            <div class="input-group">
+                <select id="song-status">
+                    <option value="false">No ensayada</option>
+                    <option value="true">Ya ensayada</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-primary">
+                <span>Agregar</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg>
+            </button>
+        </form>
+
+        <div class="action-buttons">
+            <div class="stats-container">
+                <span id="rehearsed-counter" class="status-badge status-true" style="cursor: default;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Ensayadas: 0 / 0
+                </span>
+            </div>
+            
+            <input type="file" id="import-excel-input" accept=".xlsx" style="display: none;">
+            <button id="import-excel-btn" class="btn-import">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                Importar Excel
+            </button>
+
+            <button id="export-excel-btn" class="btn-export">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Exportar a Excel
+            </button>
+        </div>
+
+        <div class="table-container glass-panel">
+            <div class="table-header">
+                <div class="col col-num">#</div>
+                <div class="col col-name">Canción</div>
+                <div class="col col-key">Tonalidad</div>
+                <div class="col col-status">Estado</div>
+                <div class="col col-actions">Acciones</div>
+            </div>
+            <div id="song-list" class="table-body">
+                <!-- Se inyectarán las canciones aquí mediante JS -->
+            </div>
+        </div>
+    </div>
+    <!-- Script para generar Excel con estilos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
